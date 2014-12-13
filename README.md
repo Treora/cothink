@@ -1,0 +1,4 @@
+cothink
+=======
+
+Collaborative thinking
