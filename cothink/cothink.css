@@ -71,16 +71,6 @@ form {
   margin-left: 10px;
 }
 
-.item.private {
-  background: #eee;
-  border-color: #ddd;
-}
-
-
-.toggle-private {
-  margin-left: 5px;
-}
-
 @media screen {
   li {
     padding: 12px 15px;
