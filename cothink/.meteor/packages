@@ -9,3 +9,5 @@ insecure
 accounts-ui
 accounts-password
 linto:jquery-ui
+iron:router
+
