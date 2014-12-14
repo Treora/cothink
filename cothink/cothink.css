@@ -71,22 +71,11 @@ form {
   margin-left: 10px;
 }
 
-.task.checked {
-  color: #888;
-}
-
-.task.checked .text {
-  text-decoration: line-through;
-}
-
 .task.private {
   background: #eee;
   border-color: #ddd;
 }
 
-header .hide-completed {
-  float: right;
-}
 
 .toggle-private {
   margin-left: 5px;

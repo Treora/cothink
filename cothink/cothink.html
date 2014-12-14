@@ -5,11 +5,7 @@
 <body>
     <div class="container">
         <header>
-        <h1>CoThink ({{incompleteCount}} open items)</h1>
-            <label class="hide-completed">
-                <input type="checkbox" checked="{{hideCompleted}}" />
-                Hide Completed Items
-            </label>
+        <h1>CoThink</h1>
             {{> loginButtons}}
             {{#if currentUser}}
                 <form class="new-task">
@@ -27,10 +23,8 @@
 </body>
 
 <template name="task">
-    <div class="task {{#if checked}}checked{{/if}}">
+    <div class="task">
         <button class="delete">&times;</button>
-
-        <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
         <span class="text"><strong>{{username}}</strong> - {{text}}</span>
     </div>
