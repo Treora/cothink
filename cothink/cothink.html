@@ -5,33 +5,33 @@
 <body>
     <div class="container">
         <header>
-        <h1>Todo List ({{incompleteCount}})</h1>
+        <h1>CoThink ({{incompleteCount}} open items)</h1>
             <label class="hide-completed">
                 <input type="checkbox" checked="{{hideCompleted}}" />
-                Hide Completed Tasks
+                Hide Completed Items
             </label>
             {{> loginButtons}}
             {{#if currentUser}}
                 <form class="new-task">
-                    <input type="text" name="text" placeholder="Type to add new tasks" />
+                    <input type="text" name="text" placeholder="Type to add new items" />
                 </form>
             {{/if}}
         </header>
 
-        <ul>
+        <div>
             {{#each tasks}}
                 {{> task}}
             {{/each}}
-        </ul>
+        </div>
     </div>
 </body>
 
 <template name="task">
-    <li class="{{#if checked}}checked{{/if}}">
+    <div class="task {{#if checked}}checked{{/if}}">
         <button class="delete">&times;</button>
 
         <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
 
         <span class="text"><strong>{{username}}</strong> - {{text}}</span>
-    </li>
+    </div>
 </template>

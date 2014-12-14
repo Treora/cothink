@@ -4,23 +4,12 @@ body {
   background-image: linear-gradient(to bottom, #315481, #918e82 100%);
   background-attachment: fixed;
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  padding: 0;
-  margin: 0;
-
   font-size: 14px;
 }
 
 .container {
-  max-width: 600px;
   margin: 0 auto;
   min-height: 100%;
-  background: white;
 }
 
 header {
@@ -62,12 +51,6 @@ form {
   outline: 0;
 }
 
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
-}
-
 .delete {
   float: right;
   font-weight: bold;
@@ -77,26 +60,26 @@ ul {
   position: relative;
 }
 
-li {
-  position: relative;
-  list-style: none;
+.task {
   padding: 15px;
-  border-bottom: #eee solid 1px;
+  border: #eee solid 1px;
+  width: 300px;
+  background-color: white;
 }
 
-li .text {
+.task .text {
   margin-left: 10px;
 }
 
-li.checked {
+.task.checked {
   color: #888;
 }
 
-li.checked .text {
+.task.checked .text {
   text-decoration: line-through;
 }
 
-li.private {
+.task.private {
   background: #eee;
   border-color: #ddd;
 }
@@ -109,7 +92,7 @@ header .hide-completed {
   margin-left: 5px;
 }
 
-@media (max-width: 600px) {
+@media screen {
   li {
     padding: 12px 15px;
   }
