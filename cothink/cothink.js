@@ -50,6 +50,10 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.task.rendered = function () {
+        this.$('.task').draggable();
+    };
+
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_ONLY"
     });

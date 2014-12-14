@@ -8,4 +8,4 @@ autopublish
 insecure
 accounts-ui
 accounts-password
-
+linto:jquery-ui
