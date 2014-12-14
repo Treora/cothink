@@ -15,9 +15,15 @@
         </header>
 
         <div>
-            {{#each items}}
-                {{> item}}
-            {{/each}}
+            <ul>
+                {{#each items}}
+                    <li>
+                        {{#linkTo route='item'}}
+                            {{this.text}}
+                        {{/linkTo}}
+                    </li>
+                {{/each}}
+            </ul>
         </div>
     </div>
 </body>
@@ -27,5 +33,6 @@
         <button class="delete">&times;</button>
 
         <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+
     </div>
 </template>

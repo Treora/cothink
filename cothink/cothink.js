@@ -1,5 +1,22 @@
 Items = new Mongo.Collection("items");
 
+Router.route('/', function () {
+    this.render("body");
+});
+
+Router.route('/item/:_id', function () {
+    var params = this.params;
+    var id = params._id;
+    this.render('item', {
+        data: function () {
+            return Items.findOne({_id: id});
+        }
+    });
+}, {
+    name: 'item'
+});
+
+
 if (Meteor.isClient) {
     // This code only runs on the client
     Template.body.helpers({
