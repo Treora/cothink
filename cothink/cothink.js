@@ -1,20 +1,20 @@
-Tasks = new Mongo.Collection("tasks");
+Items = new Mongo.Collection("items");
 
 if (Meteor.isClient) {
     // This code only runs on the client
     Template.body.helpers({
-        tasks: function () {
-            return Tasks.find({}, {sort: {createdAt: -1}});
+        items: function () {
+            return Items.find({}, {sort: {createdAt: -1}});
         },
     });
 
     Template.body.events({
-        "submit .new-task": function (event) {
-            // This function is called when the new task form is submitted
+        "submit .new-item": function (event) {
+            // This function is called when the new item form is submitted
 
             var text = event.target.text.value;
 
-            Tasks.insert({
+            Items.insert({
                 text: text,
                 createdAt: new Date(), // current time
                 owner: Meteor.userId(),           // _id of logged in user
@@ -29,14 +29,14 @@ if (Meteor.isClient) {
         }
     });
 
-    Template.task.events({
+    Template.item.events({
         "click .delete": function() {
-            Tasks.remove(this._id);
+            Items.remove(this._id);
         }
     });
 
-    Template.task.rendered = function () {
-        this.$('.task').draggable();
+    Template.item.rendered = function () {
+        this.$('.item').draggable();
     };
 
     Accounts.ui.config({

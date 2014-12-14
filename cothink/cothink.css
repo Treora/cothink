@@ -37,7 +37,7 @@ form {
   position: relative;
 }
 
-.new-task input {
+.new-item input {
   box-sizing: border-box;
   padding: 10px 0;
   background: transparent;
@@ -47,7 +47,7 @@ form {
   font-size: 1em;
 }
 
-.new-task input:focus{
+.new-item input:focus{
   outline: 0;
 }
 
@@ -60,18 +60,18 @@ form {
   position: relative;
 }
 
-.task {
+.item {
   padding: 15px;
   border: #eee solid 1px;
   width: 300px;
   background-color: white;
 }
 
-.task .text {
+.item .text {
   margin-left: 10px;
 }
 
-.task.private {
+.item.private {
   background: #eee;
   border-color: #ddd;
 }
@@ -91,7 +91,7 @@ form {
     clear: both;
   }
 
-  .new-task input {
+  .new-item input {
     padding-bottom: 5px;
   }
 }

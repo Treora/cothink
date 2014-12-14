@@ -8,22 +8,22 @@
         <h1>CoThink</h1>
             {{> loginButtons}}
             {{#if currentUser}}
-                <form class="new-task">
+                <form class="new-item">
                     <input type="text" name="text" placeholder="Type to add new items" />
                 </form>
             {{/if}}
         </header>
 
         <div>
-            {{#each tasks}}
-                {{> task}}
+            {{#each items}}
+                {{> item}}
             {{/each}}
         </div>
     </div>
 </body>
 
-<template name="task">
-    <div class="task">
+<template name="item">
+    <div class="item">
         <button class="delete">&times;</button>
 
         <span class="text"><strong>{{username}}</strong> - {{text}}</span>
