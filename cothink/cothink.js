@@ -1,5 +1,8 @@
 Items = new Mongo.Collection("items");
 
+// visible_items has no persistent storage
+visible_items = new Mongo.Collection(null);
+
 Router.route('/', function () {
     this.render("body");
 });
@@ -7,11 +10,10 @@ Router.route('/', function () {
 Router.route('/item/:_id', function () {
     var params = this.params;
     var id = params._id;
-    this.render('item', {
-        data: function () {
-            return Items.findOne({_id: id});
-        }
-    });
+    var item = Items.findOne({_id: id});
+    if (visible_items.find({_id: id}).count() == 0) {
+        visible_items.insert(item);
+    }
 }, {
     name: 'item'
 });
@@ -22,6 +24,9 @@ if (Meteor.isClient) {
     Template.body.helpers({
         items: function () {
             return Items.find({}, {sort: {createdAt: -1}});
+        },
+        visible_items: function () {
+            return visible_items.find({});
         },
     });
 
