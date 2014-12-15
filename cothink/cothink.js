@@ -54,6 +54,7 @@ if (Meteor.isClient) {
 
     Template.item.rendered = function () {
         this.$('.item').draggable();
+        this.$('.item').position({my:'center', at:'center', of:'body'});
     };
 
     Accounts.ui.config({

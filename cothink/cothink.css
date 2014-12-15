@@ -1,3 +1,7 @@
+html, body {
+  height:100%;
+}
+
 body {
   font-family: sans-serif;
   background-color: #315481;
@@ -5,6 +9,8 @@ body {
   background-attachment: fixed;
 
   font-size: 14px;
+
+  margin: 0px;
 }
 
 .container {
@@ -61,6 +67,7 @@ form {
 }
 
 .item {
+  position: absolute;
   padding: 15px;
   border: #eee solid 1px;
   width: 300px;
