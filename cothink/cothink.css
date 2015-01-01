@@ -57,7 +57,7 @@ form {
   outline: 0;
 }
 
-.delete {
+.item button {
   float: right;
   font-weight: bold;
   background: none;
