@@ -53,12 +53,12 @@ if (Meteor.isClient) {
 
     Template.item.events({
         "click .delete": function() {
-          Items.remove(this._id);
-          visible_items.remove(this._id);
+            Items.remove(this._id);
+            visible_items.remove(this._id);
         },
         "click .hide": function() {
-          Router.go('/');
-          visible_items.remove(this._id);
+            Router.go('/');
+            visible_items.remove(this._id);
         }
     });
 
