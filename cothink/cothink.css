@@ -78,6 +78,11 @@ form {
     margin-left: 10px;
 }
 
+.item .text input[type="text"] {
+    border: none;
+    background: transparent;
+}
+
 @media screen {
     li {
         padding: 12px 15px;
