@@ -52,7 +52,12 @@ if (Meteor.isClient) {
     });
 
     Template.item.events({
+        "mousedown": function() {
+            Router.go('/item/'+this._id);
+        },
+
         "click .delete": function() {
+            Router.go('/');
             Items.remove(this._id);
             visible_items.remove(this._id);
         },
