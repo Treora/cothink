@@ -59,7 +59,11 @@ if (Meteor.isClient) {
         "click .hide": function() {
             Router.go('/');
             visible_items.remove(this._id);
-        }
+        },
+
+        "keyup input[type=text]": function(event) {
+            Items.update(this._id, {$set: {text: event.target.value}});
+        },
     });
 
     Template.item.rendered = function () {
