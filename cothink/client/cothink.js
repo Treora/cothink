@@ -1,4 +1,27 @@
-visible_items = [];
+/* Item prototype
+ * Usual attributes:
+ *    id    - the item's id string
+ *    el()  - the item's DOM element
+ *    data  - the document from the collection
+ *    view  - the view returned by Blaze.render
+ */
+var Item = {
+    el: function() {
+        el = document.getElementById(this.id);
+        console.log(this.id);
+        return el;
+    }
+}
+
+create_item = function (params) {
+        item = Object.create(Item);
+        item.id = params.id;
+        item.data = params.data;
+        item.view = params.view;
+        return item;
+};
+
+visible_items = {};
 
 Router.route('/', function () {
     this.render("body");
@@ -7,15 +30,17 @@ Router.route('/', function () {
 Router.route('/item/:_id', function () {
     var params = this.params;
     var id = params._id;
-    var item = Items.findOne({_id: id});
-    if (item_is_visible(id)) {
+    item = find_item(id);
+    if (item) {
         // Item is already on the screen
-        focus_item(id);
+        focus_item(item);
     }
     else {
-        // Render the item
-        Blaze.renderWithData(Template.item, item, document.body);
-        visible_items.push(id);
+        // Load and render the item
+        data = Items.findOne({_id: id}); // todo: make reactive
+        view = Blaze.renderWithData(Template.item, data, document.body);
+        item = create_item({id: id, data: data, view: view});
+        visible_items[id] = item;
     }
 }, {
     name: 'item',
@@ -24,17 +49,14 @@ Router.route('/item/:_id', function () {
     },
 });
 
-var item_is_visible = function(id) {
-    return (visible_items.indexOf(id) >= 0);
+
+var find_item = function (id) {
+    return visible_items[id];
 };
 
-var find_item = function(id) {
-    return document.getElementById(id);
-};
-
-var focus_item = function(id) {
-    var focussed_item = $(find_item(id));
-    var other_items = $(".item").not(find_item(id));
+var focus_item = function(item) {
+    var focussed_item = $(item.el());
+    var other_items = $(".item").not(focussed_item);
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
     CoLayout.transitionToCenter(focussed_item);
@@ -90,7 +112,7 @@ Template.item.events({
 Template.item.rendered = function () {
     CoLayout.positionAtAlmostCenter(this.$('.item'));
     CoLayout.initiateCollision();
-    focus_item(id);
+    focus_item(visible_items[this.data._id]);
 };
 
 Accounts.ui.config({
