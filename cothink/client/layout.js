@@ -2,7 +2,12 @@ CoThink = {};
 
 CoThink.force = null;
 
-CoThink.initiateCollision = function(visibleItems) {
+CoThink.positionAtAlmostCenter = function (el) {
+    el.position({my:'center', at:'center', of:'body'});
+    el.offset({top: el.offset().top + Math.random(), left: el.offset().left + Math.random()});
+}
+
+CoThink.initiateCollision = function () {
     if (CoThink.force) {
       CoThink.force.stop();
     }

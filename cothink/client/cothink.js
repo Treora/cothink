@@ -89,7 +89,7 @@ Template.item.events({
 });
 
 Template.item.rendered = function () {
-    this.$('.item').position({my:'center', at:'center', of:'body'});
+    CoThink.positionAtAlmostCenter(this.$('.item'));
     CoThink.initiateCollision();
 };
 
