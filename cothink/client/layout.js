@@ -64,6 +64,7 @@ CoLayout.initiateCollision = function () {
             .each(transition(.05))
             .style('left', function (a) { return (a.x - a.w / 2) + 'px'; })
             .style('top', function (a) { return (a.y - a.h / 2) + 'px'; });
+        jsPlumb.repaintEverything();
     }
 
     function transition(stepsize) {

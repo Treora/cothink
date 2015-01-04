@@ -90,6 +90,13 @@ Template.body.events({
 });
 
 Template.item.events({
+    'click': function (event) {
+        var focussedItem = $('.item.focussed');
+        if (event.shiftKey && this._id != focussedItem[0].id) {
+            jsPlumb.connect({source: focussedItem[0].id, target: this._id});
+        }
+    },
+
     'dblclick': function () {
         Router.go('/item/' + this._id);
     },
