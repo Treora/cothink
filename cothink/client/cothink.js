@@ -7,14 +7,13 @@
  */
 var Item = {
     el: function() {
-        el = document.getElementById(this.id);
-        console.log(this.id);
+        var el = document.getElementById(this.id);
         return el;
     }
 }
 
 create_item = function (params) {
-        item = Object.create(Item);
+        var item = Object.create(Item);
         item.id = params.id;
         item.data = params.data;
         item.view = params.view;
@@ -30,15 +29,15 @@ Router.route('/', function () {
 Router.route('/item/:_id', function () {
     var params = this.params;
     var id = params._id;
-    item = find_item(id);
+    var item = find_item(id);
     if (item) {
         // Item is already on the screen
         focus_item(item);
     }
     else {
         // Load and render the item
-        data = Items.findOne({_id: id}); // todo: make reactive
-        view = Blaze.renderWithData(Template.item, data, document.body);
+        var data = Items.findOne({_id: id}); // todo: make reactive
+        var view = Blaze.renderWithData(Template.item, data, document.body);
         item = create_item({id: id, data: data, view: view});
         visible_items[id] = item;
     }
