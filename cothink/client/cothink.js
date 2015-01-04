@@ -23,7 +23,7 @@ create_item = function (params) {
 visible_items = {};
 
 Router.route('/', function () {
-    this.render("body");
+    this.render('body');
 });
 
 Router.route('/item/:_id', function () {
@@ -55,7 +55,7 @@ var find_item = function (id) {
 
 var focus_item = function(item) {
     var focussed_item = $(item.el());
-    var other_items = $(".item").not(focussed_item);
+    var other_items = $('.item').not(focussed_item);
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
     CoLayout.transitionToCenter(focussed_item);
@@ -68,7 +68,7 @@ Template.body.helpers({
 });
 
 Template.body.events({
-    "submit .new-item": function (event) {
+    'submit .new-item': function (event) {
         // This function is called when the new item form is submitted
 
         var text = event.target.text.value;
@@ -81,7 +81,7 @@ Template.body.events({
         });
 
         // Clear form
-        event.target.text.value = "";
+        event.target.text.value = '';
 
         // Prevent default form submit
         return false;
@@ -89,22 +89,22 @@ Template.body.events({
 });
 
 Template.item.events({
-    "dblclick": function() {
+    'dblclick': function() {
         Router.go('/item/'+this._id);
     },
 
-    "click .delete": function() {
+    'click .delete': function() {
         Router.go('/');
         Items.remove(this._id);
         hide_item(this._id);
     },
 
-    "click .hide": function() {
+    'click .hide': function() {
         Router.go('/');
         hide_item(this._id);
     },
 
-    "keyup input[type=text]": function(event) {
+    'keyup input[type=text]': function(event) {
         Items.update(this._id, {$set: {text: event.target.value}});
     },
 });
@@ -124,5 +124,5 @@ var hide_item = function(id) {
 
 
 Accounts.ui.config({
-    passwordSignupFields: "USERNAME_ONLY"
+    passwordSignupFields: 'USERNAME_ONLY'
 });
