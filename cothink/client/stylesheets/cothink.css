@@ -83,6 +83,10 @@ form {
     background: transparent;
 }
 
+.item.focussed {
+    background-color: #eff;
+}
+
 @media screen {
     li {
         padding: 12px 15px;

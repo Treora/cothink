@@ -10,11 +10,13 @@ Router.route('/item/:_id', function () {
     var item = Items.findOne({_id: id});
     if (item_is_visible(id)) {
         // Item is already on the screen
+        focus_item(id);
     }
     else {
         // Render the item
         Blaze.renderWithData(Template.item, item, document.body);
         visible_items.push(id);
+        focus_item(id);
     }
 }, {
     name: 'item',
@@ -26,6 +28,17 @@ Router.route('/item/:_id', function () {
 
 var item_is_visible = function(id) {
     return (visible_items.indexOf(id) >= 0);
+};
+
+var find_item = function(id) {
+    return document.getElementById(id);
+};
+
+var focus_item = function(id) {
+    var focussed_item = $(find_item(id));
+    var other_items = $(".item").not(find_item(id));
+    focussed_item.addClass('focussed');
+    other_items.removeClass('focussed');
 };
 
 Template.body.helpers({
