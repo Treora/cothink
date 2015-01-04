@@ -90,7 +90,7 @@ Template.body.events({
 });
 
 Template.item.events({
-    "mousedown": function() {
+    "dblclick": function() {
         Router.go('/item/'+this._id);
     },
 
