@@ -97,11 +97,11 @@ Template.item.events({
     "click .delete": function() {
         Router.go('/');
         Items.remove(this._id);
-        // TODO
+        hide_item(this._id)
     },
     "click .hide": function() {
         Router.go('/');
-        // TODO
+        hide_item(this._id)
     },
 
     "keyup input[type=text]": function(event) {
@@ -114,6 +114,14 @@ Template.item.rendered = function () {
     CoLayout.initiateCollision();
     focus_item(visible_items[this.data._id]);
 };
+
+
+var hide_item = function(id) {
+    item = visible_items[id];
+    Blaze.remove(item.view);
+    delete visible_items[id];
+}
+
 
 Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
