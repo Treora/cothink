@@ -16,7 +16,6 @@ Router.route('/item/:_id', function () {
         // Render the item
         Blaze.renderWithData(Template.item, item, document.body);
         visible_items.push(id);
-        focus_item(id);
     }
 }, {
     name: 'item',
@@ -24,7 +23,6 @@ Router.route('/item/:_id', function () {
         return Meteor.subscribe('items');
     },
 });
-
 
 var item_is_visible = function(id) {
     return (visible_items.indexOf(id) >= 0);
@@ -39,6 +37,7 @@ var focus_item = function(id) {
     var other_items = $(".item").not(find_item(id));
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
+    CoLayout.transitionToCenter(focussed_item);
 };
 
 Template.body.helpers({
@@ -89,8 +88,9 @@ Template.item.events({
 });
 
 Template.item.rendered = function () {
-    CoThink.positionAtAlmostCenter(this.$('.item'));
-    CoThink.initiateCollision();
+    CoLayout.positionAtAlmostCenter(this.$('.item'));
+    CoLayout.initiateCollision();
+    focus_item(id);
 };
 
 Accounts.ui.config({
