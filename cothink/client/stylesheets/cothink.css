@@ -63,24 +63,42 @@ form {
     background: none;
     font-size: 1em;
     border: none;
-    position: relative;
 }
 
 .item {
     position: absolute;
     padding: 15px;
     border: #eee solid 1px;
+    border-radius: 10px;
     width: 300px;
     background-color: white;
 }
 
-.item .text {
-    margin-left: 10px;
+.item-header {
 }
 
-.item .text input[type="text"] {
+.item-author {
+    float: right;
+    margin-right: 20px;
+    font-size: medium;
+}
+
+.item-title {
+    float: left;
+    margin-left: 10px;
+    font-size: medium;
     border: none;
+    outline: none;
+    min-width: 100px;
+}
+
+.item-text-editor {
+    outline: none;
     background: transparent;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100px;
 }
 
 .item.focussed {

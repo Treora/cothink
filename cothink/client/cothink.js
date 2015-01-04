@@ -74,7 +74,7 @@ Template.body.events({
         var text = event.target.text.value;
 
         Items.insert({
-            text: text,
+            title: text,
             createdAt: new Date(), // current time
             owner: Meteor.userId(),           // _id of logged in user
             username: Meteor.user().username  // username of logged in user
@@ -104,8 +104,12 @@ Template.item.events({
         hide_item(this._id);
     },
 
-    'keyup input[type=text]': function(event) {
-        Items.update(this._id, {$set: {text: event.target.value}});
+    'keyup .item-title': function(event) {
+        Items.update(this._id, {$set: {title: event.target.innerHTML}});
+    },
+
+    'keyup .item-text-editor': function(event) {
+        Items.update(this._id, {$set: {text: event.target.innerHTML}});
     },
 });
 
