@@ -1,4 +1,4 @@
-visible_items = new Mongo.Collection(null);
+visible_items = [];
 
 Router.route('/', function () {
     this.render("body");
@@ -8,19 +8,29 @@ Router.route('/item/:_id', function () {
     var params = this.params;
     var id = params._id;
     var item = Items.findOne({_id: id});
-    if (visible_items.find({_id: id}).count() == 0) {
-        visible_items.insert(item);
+    if (item_is_visible(id)) {
+        // Item is already on the screen
+    }
+    else {
+        // Render the item
+        Blaze.renderWithData(Template.item, item, document.body);
+        visible_items.push(id);
     }
 }, {
-    name: 'item'
+    name: 'item',
+    waitOn: function () {
+        return Meteor.subscribe('items');
+    },
 });
+
+
+var item_is_visible = function(id) {
+    return (visible_items.indexOf(id) >= 0);
+};
 
 Template.body.helpers({
     items: function () {
         return Items.find({}, {sort: {createdAt: -1}});
-    },
-    visible_items: function () {
-        return visible_items.find({});
     },
 });
 
@@ -53,11 +63,11 @@ Template.item.events({
     "click .delete": function() {
         Router.go('/');
         Items.remove(this._id);
-        visible_items.remove(this._id);
+        // TODO
     },
     "click .hide": function() {
         Router.go('/');
-        visible_items.remove(this._id);
+        // TODO
     },
 
     "keyup input[type=text]": function(event) {
