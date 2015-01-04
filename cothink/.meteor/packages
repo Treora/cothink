@@ -10,4 +10,5 @@ accounts-ui
 accounts-password
 linto:jquery-ui
 iron:router
+d3js:d3
 
