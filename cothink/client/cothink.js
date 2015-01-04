@@ -10,14 +10,14 @@ var Item = {
         var el = document.getElementById(this.id);
         return el;
     }
-}
+};
 
 create_item = function (params) {
-        var item = Object.create(Item);
-        item.id = params.id;
-        item.data = params.data;
-        item.view = params.view;
-        return item;
+    var item = Object.create(Item);
+    item.id = params.id;
+    item.data = params.data;
+    item.view = params.view;
+    return item;
 };
 
 visible_items = {};
@@ -96,11 +96,12 @@ Template.item.events({
     "click .delete": function() {
         Router.go('/');
         Items.remove(this._id);
-        hide_item(this._id)
+        hide_item(this._id);
     },
+
     "click .hide": function() {
         Router.go('/');
-        hide_item(this._id)
+        hide_item(this._id);
     },
 
     "keyup input[type=text]": function(event) {
@@ -119,7 +120,7 @@ var hide_item = function(id) {
     item = visible_items[id];
     Blaze.remove(item.view);
     delete visible_items[id];
-}
+};
 
 
 Accounts.ui.config({
