@@ -89,11 +89,20 @@ Template.body.events({
     }
 });
 
+Template.body.rendered = function () {
+    jsPlumb.importDefaults({
+        Anchors : [ "AutoDefault", "AutoDefault" ]
+    });
+};
+
 Template.item.events({
     'click': function (event) {
         var focussedItem = $('.item.focussed');
         if (event.shiftKey && this._id != focussedItem[0].id) {
-            jsPlumb.connect({source: focussedItem[0].id, target: this._id});
+            jsPlumb.connect({
+                source: focussedItem[0].id,
+                target: this._id
+            });
         }
     },
 
