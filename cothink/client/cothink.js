@@ -6,7 +6,7 @@
  *    view  - the view returned by Blaze.render
  */
 var Item = {
-    el: function() {
+    el: function () {
         var el = document.getElementById(this.id);
         return el;
     }
@@ -53,7 +53,7 @@ var find_item = function (id) {
     return visible_items[id];
 };
 
-var focus_item = function(item) {
+var focus_item = function (item) {
     var focussed_item = $(item.el());
     var other_items = $('.item').not(focussed_item);
     focussed_item.addClass('focussed');
@@ -89,26 +89,26 @@ Template.body.events({
 });
 
 Template.item.events({
-    'dblclick': function() {
+    'dblclick': function () {
         Router.go('/item/'+this._id);
     },
 
-    'click .delete': function() {
+    'click .delete': function () {
         Router.go('/');
         Items.remove(this._id);
         hide_item(this._id);
     },
 
-    'click .hide': function() {
+    'click .hide': function () {
         Router.go('/');
         hide_item(this._id);
     },
 
-    'keyup .item-title': function(event) {
+    'keyup .item-title': function (event) {
         Items.update(this._id, {$set: {title: event.target.innerHTML}});
     },
 
-    'keyup .item-text-editor': function(event) {
+    'keyup .item-text-editor': function (event) {
         Items.update(this._id, {$set: {text: event.target.innerHTML}});
     },
 });
@@ -120,7 +120,7 @@ Template.item.rendered = function () {
 };
 
 
-var hide_item = function(id) {
+var hide_item = function (id) {
     item = visible_items[id];
     Blaze.remove(item.view);
     delete visible_items[id];

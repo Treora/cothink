@@ -9,7 +9,7 @@ CoLayout.positionAtAlmostCenter = function (el) {
     el.offset({top: el.offset().top + Math.random() - .5, left: el.offset().left + Math.random() -.5});
 }
 
-CoLayout.transitionToCenter = function($el) {
+CoLayout.transitionToCenter = function ($el) {
     var w = $(window).width(),
         h = $(window).height();
     CoLayout.transitions[$el[0].id] = {
@@ -28,7 +28,7 @@ CoLayout.initiateCollision = function () {
     }
 
     var anchors = [];
-    $('.item').each(function(i, el) {
+    $('.item').each(function (i, el) {
         var item = $(el);
         var anchor = {
             id: el.id,
@@ -50,19 +50,19 @@ CoLayout.initiateCollision = function () {
         .start();
 
     var nodes = d3.selectAll('.item')
-        .data(anchors, function(a) { return a.id; })
+        .data(anchors, function (a) { return a.id; })
         .call(CoLayout.force.drag);
 
     function tick(e) {
         nodes
             .each(collide())
             .each(transition(.05))
-            .style('left', function(a) { return (a.x - a.w / 2) + 'px'; })
-            .style('top', function(a) { return (a.y - a.h / 2) + 'px'; });
+            .style('left', function (a) { return (a.x - a.w / 2) + 'px'; })
+            .style('top', function (a) { return (a.y - a.h / 2) + 'px'; });
     }
 
     function transition(stepsize) {
-        return function(a) {
+        return function (a) {
             if (!(a.id in CoLayout.transitions)) {
                 return;
             }
@@ -83,7 +83,7 @@ CoLayout.initiateCollision = function () {
 
     function collide() {
         var quadtree = d3.geom.quadtree(anchors);
-        return function(a) {
+        return function (a) {
             nx1 = a.x - a.w / 2,
             nx2 = a.x + a.w / 2,
             ny1 = a.y - a.h / 2,
