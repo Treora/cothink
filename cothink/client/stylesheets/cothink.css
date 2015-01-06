@@ -105,6 +105,10 @@ form {
     background-color: #eff;
 }
 
+.item:not(.focussed) .item-text-editor {
+    display: none;
+}
+
 @media screen {
     li {
         padding: 12px 15px;
