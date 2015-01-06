@@ -19,7 +19,7 @@
                 {{#each items}}
                     <li>
                         {{#linkTo route='item'}}
-                            {{this.text}}
+                            - {{this.title}} -
                         {{/linkTo}}
                     </li>
                 {{/each}}
@@ -30,10 +30,13 @@
 
 <template name="item">
     <div class="item" id="{{_id}}">
-        <button class="delete">&times;</button>
-        <button class="hide">H</button>
-
-        <span class="text"><strong>{{username}}</strong> - <input name="text" type="text" value="{{text}}" placeholder="....."></span>
-
+        <div class="item-header">
+            <div contentEditable="true" class="item-title" name="title" type="text">{{{title}}}</div>
+            <button class="delete">&times;</button>
+            <button class="hide">H</button>
+            <em class="item-author">{{username}}</em>
+        </div>
+        <br>
+        <div contentEditable="true" class="item-text-editor">{{{text}}}</div>
     </div>
 </template>
