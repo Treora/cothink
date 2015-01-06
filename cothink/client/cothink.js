@@ -58,6 +58,7 @@ var focus_item = function (item) {
     var other_items = $('.item').not(focussed_item);
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
+
     CoLayout.transitionToCenter(focussed_item);
 };
 
@@ -90,7 +91,7 @@ Template.body.events({
 
 Template.item.events({
     'dblclick': function () {
-        Router.go('/item/'+this._id);
+        Router.go('/item/' + this._id);
     },
 
     'click .delete': function () {

@@ -29,14 +29,7 @@ CoLayout.initiateCollision = function () {
 
     var anchors = [];
     $('.item').each(function (i, el) {
-        var item = $(el);
-        var anchor = {
-            id: el.id,
-            x: item.offset().left + item.outerWidth() / 2,
-            y: item.offset().top + item.outerHeight() / 2,
-            h: item.outerHeight(),
-            w: item.outerWidth()
-        };
+        var anchor = createAnchor(el);
         anchors.push(anchor);
         el.__data__ = anchor;
     });
@@ -52,6 +45,18 @@ CoLayout.initiateCollision = function () {
     var nodes = d3.selectAll('.item')
         .data(anchors, function (a) { return a.id; })
         .call(CoLayout.force.drag);
+
+    function createAnchor(el) {
+        var item = $(el);
+        var anchor = {
+            id: el.id,
+            x: item.offset().left + item.outerWidth() / 2,
+            y: item.offset().top + item.outerHeight() / 2,
+            h: item.outerHeight(),
+            w: item.outerWidth()
+        };
+        return anchor;
+    }
 
     function tick(e) {
         nodes
@@ -91,17 +96,17 @@ CoLayout.initiateCollision = function () {
             quadtree.visit(function(quad, x1, y1, x2, y2) {
                 if (quad.point && (quad.point !== a)) {
                     var oa = quad.point,
-                        x = a.x - oa.x,
-                        y = a.y - oa.y,
+                        dx = a.x - oa.x,
+                        dy = a.y - oa.y,
                         dw = a.w / 2 + oa.w / 2,
                         dh = a.h / 2 + oa.h / 2;
-                    if (Math.abs(x) < dw && Math.abs(y) < dh) {
-                        x /= 2 * dw;
-                        y /= 2 * dh;
-                        a.x += x;
-                        a.y += y;
-                        oa.x -= x;
-                        oa.y -= y;
+                    if (Math.abs(dx) < dw && Math.abs(dy) < dh) {
+                        dx /= 2 * dw;
+                        dy /= 2 * dh;
+                        a.x += dx;
+                        a.y += dy;
+                        oa.x -= dx;
+                        oa.y -= dy;
                     }
                 }
                 return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;

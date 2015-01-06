@@ -99,14 +99,15 @@ form {
     width: 100%;
     box-sizing: border-box;
     min-height: 100px;
+    display: none;
 }
 
 .item.focussed {
     background-color: #eff;
 }
 
-.item:not(.focussed) .item-text-editor {
-    display: none;
+.item.focussed .item-text-editor {
+    display: block;
 }
 
 @media screen {
