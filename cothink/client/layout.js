@@ -7,7 +7,7 @@ CoLayout.transitions = {};
 CoLayout.positionAtAlmostCenter = function (el) {
     el.position({my:'center', at:'center', of:'body'});
     el.offset({top: el.offset().top + Math.random() - .5, left: el.offset().left + Math.random() -.5});
-}
+};
 
 CoLayout.transitionToCenter = function ($el) {
     var w = $(window).width(),
@@ -20,7 +20,21 @@ CoLayout.transitionToCenter = function ($el) {
         progress: 0
     };
     CoLayout.force.resume();
-}
+};
+
+CoLayout.redrawLinks = function () {
+    var focussedId = $('.item.focussed')[0].id,
+        links = Links.find({ids: focussedId});
+
+    jsPlumb.removeAllEndpoints();
+    links.forEach(function (link) {
+        CoLayout.drawLink(link.ids[0], link.ids[1]);
+    });
+};
+
+CoLayout.drawLink = function (id1, id2) {
+    jsPlumb.connect({source: id1, target: id2});
+};
 
 CoLayout.initiateCollision = function () {
     if (CoLayout.force) {
