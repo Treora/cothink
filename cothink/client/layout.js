@@ -26,7 +26,7 @@ CoLayout.redrawLinks = function () {
     var focussedId = $('.item.focussed')[0].id,
         links = Links.find({ids: focussedId});
 
-    jsPlumb.removeAllEndpoints();
+    jsPlumb.detachEveryConnection();
     links.forEach(function (link) {
         CoLayout.drawLink(link.ids[0], link.ids[1]);
     });
