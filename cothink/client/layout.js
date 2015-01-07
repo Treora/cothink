@@ -48,11 +48,22 @@ CoLayout.initiateCollision = function () {
         el.__data__ = anchor;
     });
 
+    var links = [];
+    Links.find({}).fetch().forEach(function (l) {
+        var el1 = document.getElementById(l.ids[0]),
+            el2 = document.getElementById(l.ids[1]);
+        if (el1 && el2) links.push({source: el1.__data__, target: el2.__data__});
+    });
+
     CoLayout.force = d3.layout.force()
         .nodes(anchors)
+        .links(links)
+        .linkDistance(100)
+        .linkStrength(.1)
         .size([$(window).width(), $(window).height()])
         .gravity(0)
-        .charge(0)
+        .charge(-80)
+        .chargeDistance(100)
         .on('tick', tick)
         .start();
 

@@ -92,7 +92,8 @@ Template.body.events({
 Template.body.rendered = function () {
     jsPlumb.importDefaults({
         Connector : [ "Bezier", { curviness: 30 } ],
-        Anchors : [ "AutoDefault", "AutoDefault" ]
+        Anchors : [ "AutoDefault", "AutoDefault" ],
+        Endpoint:[ "Dot", { radius: 5 } ]
     });
 };
 
