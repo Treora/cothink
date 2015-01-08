@@ -22,9 +22,8 @@ CoLayout.transitionToCenter = function ($el) {
     CoLayout.force.resume();
 };
 
-CoLayout.redrawLinks = function () {
-    var focussedId = $('.item.focussed')[0].id,
-        links = Links.find({ids: focussedId});
+CoLayout.redrawLinks = function (focussedId) {
+    var links = Links.find({ids: focussedId});
 
     jsPlumb.detachEveryConnection();
     links.forEach(function (link) {
