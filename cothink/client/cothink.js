@@ -59,6 +59,7 @@ var focus_item = function (item) {
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
 
+    CoLayout.redrawLinks(item.id);
     CoLayout.transitionToCenter(focussed_item);
 };
 
@@ -89,7 +90,22 @@ Template.body.events({
     }
 });
 
+Template.body.rendered = function () {
+    jsPlumb.importDefaults({
+        Connector : [ "Bezier", { curviness: 30 } ],
+        Anchors : [ "AutoDefault", "AutoDefault" ],
+        Endpoint:[ "Dot", { radius: 5 } ]
+    });
+};
+
 Template.item.events({
+    'click': function (event) {
+        var focussedItem = $('.item.focussed');
+        if (event.shiftKey && this._id != focussedItem[0].id) {
+            link_items(focussedItem[0].id, this._id);
+        }
+    },
+
     'dblclick': function () {
         Router.go('/item/' + this._id);
     },
@@ -127,6 +143,10 @@ var hide_item = function (id) {
     delete visible_items[id];
 };
 
+var link_items = function (id1, id2) {
+    Links.insert({ids: [id1, id2]});
+    CoLayout.drawLink(id1, id2);
+};
 
 Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'

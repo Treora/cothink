@@ -110,6 +110,10 @@ form {
     display: block;
 }
 
+svg, div._jsPlumb_endpoint {
+  z-index: 2;
+}
+
 @media screen {
     li {
         padding: 12px 15px;

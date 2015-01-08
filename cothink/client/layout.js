@@ -7,7 +7,7 @@ CoLayout.transitions = {};
 CoLayout.positionAtAlmostCenter = function (el) {
     el.position({my:'center', at:'center', of:'body'});
     el.offset({top: el.offset().top + Math.random() - .5, left: el.offset().left + Math.random() -.5});
-}
+};
 
 CoLayout.transitionToCenter = function ($el) {
     var w = $(window).width(),
@@ -20,7 +20,20 @@ CoLayout.transitionToCenter = function ($el) {
         progress: 0
     };
     CoLayout.force.resume();
-}
+};
+
+CoLayout.redrawLinks = function (focussedId) {
+    var links = Links.find({ids: focussedId});
+
+    jsPlumb.detachEveryConnection();
+    links.forEach(function (link) {
+        CoLayout.drawLink(link.ids[0], link.ids[1]);
+    });
+};
+
+CoLayout.drawLink = function (id1, id2) {
+    jsPlumb.connect({source: id1, target: id2});
+};
 
 CoLayout.initiateCollision = function () {
     if (CoLayout.force) {
@@ -34,11 +47,22 @@ CoLayout.initiateCollision = function () {
         el.__data__ = anchor;
     });
 
+    var links = [];
+    Links.find({}).fetch().forEach(function (l) {
+        var el1 = document.getElementById(l.ids[0]),
+            el2 = document.getElementById(l.ids[1]);
+        if (el1 && el2) links.push({source: el1.__data__, target: el2.__data__});
+    });
+
     CoLayout.force = d3.layout.force()
         .nodes(anchors)
+        .links(links)
+        .linkDistance(100)
+        .linkStrength(.1)
         .size([$(window).width(), $(window).height()])
         .gravity(0)
-        .charge(0)
+        .charge(-80)
+        .chargeDistance(100)
         .on('tick', tick)
         .start();
 
@@ -64,6 +88,7 @@ CoLayout.initiateCollision = function () {
             .each(transition(.05))
             .style('left', function (a) { return (a.x - a.w / 2) + 'px'; })
             .style('top', function (a) { return (a.y - a.h / 2) + 'px'; });
+        jsPlumb.repaintEverything();
     }
 
     function transition(stepsize) {
