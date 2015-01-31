@@ -59,7 +59,7 @@ var focus_item = function (item) {
     focussed_item.addClass('focussed');
     other_items.removeClass('focussed');
 
-    CoLayout.redrawLinks(item.id);
+    CoLayout.redrawLinks(visible_items);
     CoLayout.transitionToCenter(focussed_item);
 };
 

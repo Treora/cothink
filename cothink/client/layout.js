@@ -22,12 +22,13 @@ CoLayout.transitionToCenter = function ($el) {
     CoLayout.force.resume();
 };
 
-CoLayout.redrawLinks = function (focussedId) {
-    var links = Links.find({ids: focussedId});
-
+CoLayout.redrawLinks = function (visible_items) {
+    var links = Links.find();
     jsPlumb.detachEveryConnection();
     links.forEach(function (link) {
-        CoLayout.drawLink(link.ids[0], link.ids[1]);
+        if (link.ids[0] in visible_items && link.ids[1] in visible_items) {
+          CoLayout.drawLink(link.ids[0], link.ids[1]);
+        }
     });
 };
 
