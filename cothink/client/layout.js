@@ -76,8 +76,8 @@ CoLayout.initiateCollision = function () {
             id: el.id,
             x: item.offset().left + item.outerWidth() / 2,
             y: item.offset().top + item.outerHeight() / 2,
-            h: item.outerHeight(),
-            w: item.outerWidth()
+            h: function () {return item.outerHeight();},
+            w: function () {return item.outerWidth();},
         };
         return anchor;
     }
@@ -86,8 +86,8 @@ CoLayout.initiateCollision = function () {
         nodes
             .each(collide())
             .each(transition(.05))
-            .style('left', function (a) { return (a.x - a.w / 2) + 'px'; })
-            .style('top', function (a) { return (a.y - a.h / 2) + 'px'; });
+            .style('left', function (a) { return (a.x - a.w() / 2) + 'px'; })
+            .style('top', function (a) { return (a.y - a.h() / 2) + 'px'; });
         jsPlumb.repaintEverything();
     }
 
@@ -114,17 +114,17 @@ CoLayout.initiateCollision = function () {
     function collide() {
         var quadtree = d3.geom.quadtree(anchors);
         return function (a) {
-            nx1 = a.x - a.w / 2,
-            nx2 = a.x + a.w / 2,
-            ny1 = a.y - a.h / 2,
-            ny2 = a.y + a.h / 2;
+            nx1 = a.x - a.w() / 2,
+            nx2 = a.x + a.w() / 2,
+            ny1 = a.y - a.h() / 2,
+            ny2 = a.y + a.h() / 2;
             quadtree.visit(function(quad, x1, y1, x2, y2) {
                 if (quad.point && (quad.point !== a)) {
                     var oa = quad.point,
                         dx = a.x - oa.x,
                         dy = a.y - oa.y,
-                        dw = a.w / 2 + oa.w / 2,
-                        dh = a.h / 2 + oa.h / 2;
+                        dw = a.w() / 2 + oa.w() / 2,
+                        dh = a.h() / 2 + oa.h() / 2;
                     if (Math.abs(dx) < dw && Math.abs(dy) < dh) {
                         dx /= 2 * dw;
                         dy /= 2 * dh;
