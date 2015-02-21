@@ -63,6 +63,12 @@ var focus_item = function (item) {
     CoLayout.transitionToCenter(focussed_item);
 };
 
+var unfocus_item = function (item) {
+  var focussed_item = $(item.el());
+  focussed_item.removeClass('focussed');
+  Router.go('/');
+};
+
 Template.body.helpers({
     items: function () {
         return Items.find({}, {sort: {createdAt: -1}});
