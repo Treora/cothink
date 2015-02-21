@@ -97,6 +97,15 @@ form {
     min-height: 1em;
 }
 
+.item-title.editing-mode .item-title-display {
+    display: none;
+}
+
+.item-title.editing-mode .item-title-editor {
+    display: block;
+}
+
+
 .item-title-editor {
     background: transparent;
     font-size: medium;

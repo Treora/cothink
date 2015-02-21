@@ -142,14 +142,13 @@ Template.itemtext.events({
 Template.itemtitle.events({
     'click .item-title-display': function (event) {
         var inst = Template.instance();
-        inst.$('.item-title-display').hide();
-        inst.$('.item-title-editor').val(this.title).show().focus();
+        inst.$('.item-title').addClass('editing-mode');
+        inst.$('.item-title-editor').val(this.title).focus();
     },
 
    'blur .item-title-editor': function (event) {
         var inst = Template.instance();
-        inst.$('.item-title-editor').hide();
-        inst.$('.item-title-display').show();
+        inst.$('.item-title').removeClass('editing-mode');
     },
 
     'keydown .item-title-editor': function(event) {
