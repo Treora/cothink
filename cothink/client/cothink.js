@@ -36,7 +36,10 @@ Router.route('/item/:_id', function () {
     }
     else {
         // Load and render the item
-        var data = Items.findOne({_id: id}); // todo: make reactive
+        var data = function () {
+          var data = Items.findOne({_id: id});
+          return data;
+        };
         var view = Blaze.renderWithData(Template.item, data, document.body);
         item = create_item({id: id, data: data, view: view});
         visible_items[id] = item;
@@ -104,6 +107,40 @@ Template.body.rendered = function () {
     });
 };
 
+
+Template.itemtext.helpers({
+});
+
+
+Template.itemtext.events({
+    'click .item-text-display': function (event) {
+        var inst = Template.instance();
+        Session.set('editing', true);
+        inst.$('.item-text-display').hide();
+        inst.$('.item-text-editor').val(this.text).show().focus();
+    },
+
+    'blur .item-text-editor': function (event) {
+        var inst = Template.instance();
+        Session.set('editing', false);
+        inst.$('.item-text-editor').hide();
+        inst.$('.item-text-display').show();
+    },
+
+    'keydown .item-text-editor': function(event) {
+      if (event.which === 27) { // ESC
+        event.preventDefault();
+        event.target.blur();
+      }
+    },
+
+    'keyup .item-text-editor': function (event) {
+        Items.update(this._id, {$set: {text: event.target.value}});
+    },
+
+});
+
+
 Template.item.events({
     'click': function (event) {
         var focussedItem = $('.item.focussed');
@@ -130,10 +167,6 @@ Template.item.events({
     'keyup .item-title': function (event) {
         Items.update(this._id, {$set: {title: event.target.innerHTML}});
     },
-
-    'keyup .item-text-editor': function (event) {
-        Items.update(this._id, {$set: {text: event.target.innerHTML}});
-    },
 });
 
 Template.item.rendered = function () {
@@ -141,7 +174,6 @@ Template.item.rendered = function () {
     CoLayout.initiateCollision();
     focus_item(find_item(this.data._id));
 };
-
 
 var hide_item = function (id) {
     item = visible_items[id];

@@ -37,6 +37,11 @@
             <em class="item-author">{{username}}</em>
         </div>
         <br>
-        <div contentEditable="true" class="item-text-editor">{{{text}}}</div>
+        {{> itemtext}}
     </div>
+</template>
+
+<template name="itemtext">
+    <textarea name="item-text-editor" class="item-text-editor"></textarea>
+    <div class="item-text-display">{{{text}}}</div>
 </template>

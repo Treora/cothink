@@ -11,6 +11,7 @@ body {
     font-size: 14px;
 
     margin: 0px;
+
 }
 
 .container {
@@ -94,6 +95,7 @@ form {
 
 .item-text-editor {
     outline: none;
+    border: none;
     background: transparent;
     padding: 10px;
     width: 100%;
@@ -102,12 +104,20 @@ form {
     display: none;
 }
 
-.item.focussed {
-    background-color: #eff;
+.item-text-display {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    min-height: 100px;
+    display: none;
 }
 
-.item.focussed .item-text-editor {
+.item.focussed .item-text-display {
     display: block;
+}
+
+.item.focussed {
+    background-color: #eff;
 }
 
 svg, div._jsPlumb_endpoint {
