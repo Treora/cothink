@@ -139,6 +139,31 @@ Template.itemtext.events({
 
 });
 
+Template.itemtitle.events({
+    'click .item-title-display': function (event) {
+        var inst = Template.instance();
+        inst.$('.item-title-display').hide();
+        inst.$('.item-title-editor').val(this.title).show().focus();
+    },
+
+   'blur .item-title-editor': function (event) {
+        var inst = Template.instance();
+        inst.$('.item-title-editor').hide();
+        inst.$('.item-title-display').show();
+    },
+
+    'keydown .item-title-editor': function(event) {
+        if (event.which === 27) { // ESC
+            event.preventDefault();
+            event.target.blur();
+        }
+    },
+
+    'keyup .item-title-editor': function (event) {
+        Items.update(this._id, {$set: {title: event.target.value}});
+    },
+});
+
 
 Template.item.events({
     'click': function (event) {
@@ -161,10 +186,6 @@ Template.item.events({
     'click .hide': function () {
         Router.go('/');
         hide_item(this._id);
-    },
-
-    'keyup .item-title': function (event) {
-        Items.update(this._id, {$set: {title: event.target.innerHTML}});
     },
 });
 

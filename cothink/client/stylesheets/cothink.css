@@ -88,6 +88,17 @@ form {
 .item-title {
     float: left;
     margin-left: 10px;
+    box-sizing: border-box;
+    min-width: 150px;
+}
+
+.item-title-display {
+    font-size: medium;
+    min-height: 1em;
+}
+
+.item-title-editor {
+    background: transparent;
     font-size: medium;
     border: none;
     display: none;

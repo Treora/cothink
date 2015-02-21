@@ -31,13 +31,20 @@
 <template name="item">
     <div class="item" id="{{_id}}">
         <div class="item-header">
-            <div contentEditable="true" class="item-title" name="title" type="text">{{{title}}}</div>
+            {{> itemtitle}}
             <button class="delete">&times;</button>
             <button class="hide">H</button>
             <em class="item-author">{{username}}</em>
         </div>
         <br>
         {{> itemtext}}
+    </div>
+</template>
+
+<template name="itemtitle">
+    <div class="item-title">
+        <input class="item-title-editor" name="title" type="text" size="5" />
+        <div class="item-title-display">{{{title}}}</div>
     </div>
 </template>
 
