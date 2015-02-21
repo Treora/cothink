@@ -58,12 +58,12 @@ CoLayout.initiateCollision = function () {
     CoLayout.force = d3.layout.force()
         .nodes(anchors)
         .links(links)
-        .linkDistance(100)
-        .linkStrength(.1)
+        .linkDistance(200)
+        .linkStrength(.5)
         .size([$(window).width(), $(window).height()])
         .gravity(0)
         .charge(-80)
-        .chargeDistance(100)
+        .chargeDistance(1000)
         .on('tick', tick)
         .start();
 
