@@ -116,15 +116,14 @@ Template.itemtext.events({
     'click .item-text-display': function (event) {
         var inst = Template.instance();
         Session.set('editing', true);
-        inst.$('.item-text-display').hide();
-        inst.$('.item-text-editor').val(this.text).show().focus();
+        inst.$('.item-text').addClass('editing-mode');
+        inst.$('.item-text-editor').val(this.text).focus();
     },
 
     'blur .item-text-editor': function (event) {
         var inst = Template.instance();
         Session.set('editing', false);
-        inst.$('.item-text-editor').hide();
-        inst.$('.item-text-display').show();
+        inst.$('.item-text').removeClass('editing-mode');
     },
 
     'keydown .item-text-editor': function(event) {

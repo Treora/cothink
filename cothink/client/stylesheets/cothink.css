@@ -76,6 +76,7 @@ form {
 }
 
 .item-header {
+    overflow: auto;
 }
 
 .item-author {
@@ -89,30 +90,45 @@ form {
     margin-left: 10px;
     font-size: medium;
     border: none;
-    outline: none;
-    min-width: 100px;
+    display: none;
+    width: 100%;
+}
+
+.item-text {
+    box-sizing: border-box;
+    min-height: 100px;
+    width: 100%;
+    display: none;
 }
 
 .item-text-editor {
-    outline: none;
     border: none;
     background: transparent;
     padding: 10px;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    min-height: 100px;
     display: none;
+    resize: vertical;
 }
 
 .item-text-display {
     padding: 10px;
     width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    min-height: 100px;
+    display: block;
+}
+
+.item.focussed .item-text {
+    display: block;
+}
+
+.item-text.editing-mode .item-text-display {
     display: none;
 }
 
-.item.focussed .item-text-display {
+.item-text.editing-mode .item-text-editor {
     display: block;
 }
 
