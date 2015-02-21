@@ -3,7 +3,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="items-container">
         <header>
         <h1>CoThink</h1>
             {{> loginButtons}}
@@ -43,8 +43,8 @@
 
 <template name="itemtitle">
     <div class="item-title editable-container">
-        <input class="item-title-editor editable-editor" type="text" size="5" />
-        <div class="item-title-display editable-display">{{{title}}}</div>
+        <input class="editable-editor" type="text" size="5" />
+        <div class="editable-display">{{{title}}}</div>
     </div>
 </template>
 
