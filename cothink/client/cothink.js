@@ -139,7 +139,7 @@ Template.item.events({
 Template.item.rendered = function () {
     CoLayout.positionAtAlmostCenter(this.$('.item'));
     CoLayout.initiateCollision();
-    focus_item(visible_items[this.data._id]);
+    focus_item(find_item(this.data._id));
 };
 
 
