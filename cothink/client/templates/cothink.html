@@ -42,15 +42,15 @@
 </template>
 
 <template name="itemtitle">
-    <div class="item-title">
-        <input class="item-title-editor" name="title" type="text" size="5" />
-        <div class="item-title-display">{{{title}}}</div>
+    <div class="item-title editable-container">
+        <input class="item-title-editor editable-editor" type="text" size="5" />
+        <div class="item-title-display editable-display">{{{title}}}</div>
     </div>
 </template>
 
 <template name="itemtext">
-    <div class="item-text">
-        <div class="item-text-display">{{{text}}}</div>
-        <textarea name="item-text-editor" class="item-text-editor"></textarea>
+    <div class="item-text editable-container">
+        <div class="editable-display">{{{text}}}</div>
+        <textarea class="editable-editor"></textarea>
     </div>
 </template>

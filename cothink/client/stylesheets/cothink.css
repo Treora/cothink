@@ -92,25 +92,27 @@ form {
     min-width: 150px;
 }
 
-.item-title-display {
+.item-title .editable-display {
     font-size: medium;
     min-height: 1em;
 }
 
-.item-title.editing-mode .item-title-display {
+.editable-container.editing-mode .editable-display {
     display: none;
 }
 
-.item-title.editing-mode .item-title-editor {
+.editable-container.editing-mode .editable-editor {
     display: block;
 }
 
+.editable-editor {
+    display: none;
+}
 
 .item-title-editor {
     background: transparent;
     font-size: medium;
     border: none;
-    display: none;
     width: 100%;
 }
 
@@ -121,34 +123,24 @@ form {
     display: none;
 }
 
-.item-text-editor {
+.item-text .editable-editor {
     border: none;
     background: transparent;
     padding: 10px;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    display: none;
     resize: vertical;
 }
 
-.item-text-display {
+.item-text .editable-display {
     padding: 10px;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    display: block;
 }
 
 .item.focussed .item-text {
-    display: block;
-}
-
-.item-text.editing-mode .item-text-display {
-    display: none;
-}
-
-.item-text.editing-mode .item-text-editor {
     display: block;
 }
 

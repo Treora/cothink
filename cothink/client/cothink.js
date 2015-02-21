@@ -112,56 +112,39 @@ Template.itemtext.helpers({
 });
 
 
-Template.itemtext.events({
-    'click .item-text-display': function (event) {
-        var inst = Template.instance();
-        Session.set('editing', true);
-        inst.$('.item-text').addClass('editing-mode');
-        inst.$('.item-text-editor').val(this.text).focus();
-    },
+var eventsForEditable = function (fieldName) {
+    return {
+        'click .editable-display': function (event) {
+            var inst = Template.instance();
+            inst.$('.editable-container').addClass('editing-mode');
+            inst.$('.editable-editor').val(this[fieldName]).focus();
+        },
 
-    'blur .item-text-editor': function (event) {
-        var inst = Template.instance();
-        Session.set('editing', false);
-        inst.$('.item-text').removeClass('editing-mode');
-    },
+        'blur .editable-editor': function (event) {
+            var inst = Template.instance();
+            Session.set('editing', false);
+            inst.$('.editable-container').removeClass('editing-mode');
+        },
 
-    'keydown .item-text-editor': function(event) {
-      if (event.which === 27) { // ESC
-        event.preventDefault();
-        event.target.blur();
-      }
-    },
+        'keydown .editable-editor': function(event) {
+            if (event.which === 27) { // ESC
+                event.preventDefault();
+                event.target.blur();
+            }
+        },
 
-    'keyup .item-text-editor': function (event) {
-        Items.update(this._id, {$set: {text: event.target.value}});
-    },
+        'keyup .editable-editor': function (event) {
+            var fieldUpdate = {};
+            fieldUpdate[fieldName] = event.target.value;
+            Items.update(this._id, {$set: fieldUpdate});
+        },
+    };
+};
 
-});
 
-Template.itemtitle.events({
-    'click .item-title-display': function (event) {
-        var inst = Template.instance();
-        inst.$('.item-title').addClass('editing-mode');
-        inst.$('.item-title-editor').val(this.title).focus();
-    },
+Template.itemtext.events(eventsForEditable('text'));
 
-   'blur .item-title-editor': function (event) {
-        var inst = Template.instance();
-        inst.$('.item-title').removeClass('editing-mode');
-    },
-
-    'keydown .item-title-editor': function(event) {
-        if (event.which === 27) { // ESC
-            event.preventDefault();
-            event.target.blur();
-        }
-    },
-
-    'keyup .item-title-editor': function (event) {
-        Items.update(this._id, {$set: {title: event.target.value}});
-    },
-});
+Template.itemtitle.events(eventsForEditable('title'));
 
 
 Template.item.events({
