@@ -44,6 +44,10 @@ Router.route('/item/:_id', function () {
         item = create_item({id: id, data: data, view: view});
         visible_items[id] = item;
     }
+
+    // Small hack to get rid of warning message "Route dispatch never rendered".
+    this._rendered = true;
+
 }, {
     name: 'item',
     waitOn: function () {
