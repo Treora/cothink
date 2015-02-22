@@ -49,6 +49,7 @@ Router.route('/item/:_id', function () {
     waitOn: function () {
         return Meteor.subscribe('items');
     },
+    loadingTemplate: 'empty',
 });
 
 
