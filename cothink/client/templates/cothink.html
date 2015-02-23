@@ -42,14 +42,14 @@
 </template>
 
 <template name="itemtitle">
-    <div class="item-title editable-container">
+    <div class="item-title editable-container {{#if editingMode}}editing-mode{{/if}}">
         <input class="editable-editor" type="text" size="5" />
         <div class="editable-display">{{{title}}}</div>
     </div>
 </template>
 
 <template name="itemtext">
-    <div class="item-text editable-container">
+    <div class="item-text editable-container {{#if editingMode}}editing-mode{{/if}}">
         <div class="editable-display">{{{text}}}</div>
         <textarea class="editable-editor" rows="10"></textarea><!-- TODO: automatic textarea expansion (or back to editable div) -->
     </div>

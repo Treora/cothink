@@ -13,3 +13,4 @@ iron:router
 d3js:d3
 jsplumb:jsplumb
 
+reactive-dict

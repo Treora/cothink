@@ -113,22 +113,20 @@ Template.body.rendered = function () {
 };
 
 
-Template.itemtext.helpers({
-});
-
-
 var eventsForEditable = function (fieldName) {
     return {
-        'click .editable-display': function (event) {
+        'click .editable-display': function (event, template) {
             var inst = Template.instance();
-            inst.$('.editable-container').addClass('editing-mode');
-            inst.$('.editable-editor').val(this[fieldName]).focus();
+            template.state.set('editingMode', true);
+            template.$('.editable-editor').val(this[fieldName]);
+            Tracker.afterFlush(function () {
+                // Need to wait with focussing until item has become visible.
+                template.$('.editable-editor').focus();
+            });
         },
 
-        'blur .editable-editor': function (event) {
-            var inst = Template.instance();
-            Session.set('editing', false);
-            inst.$('.editable-container').removeClass('editing-mode');
+        'blur .editable-editor': function (event, template) {
+            template.state.set('editingMode', false);
         },
 
         'keydown .editable-editor': function(event) {
@@ -147,7 +145,28 @@ var eventsForEditable = function (fieldName) {
 };
 
 
+Template.itemtext.created = function () {
+    this.state = new ReactiveDict();
+};
+
+Template.itemtext.helpers({
+    editingMode: function (value) {
+        return Template.instance().state.get('editingMode');
+    },
+});
+
 Template.itemtext.events(eventsForEditable('text'));
+
+
+Template.itemtitle.created = function () {
+    this.state = new ReactiveDict();
+};
+
+Template.itemtitle.helpers({
+    editingMode: function (value) {
+        return Template.instance().state.get('editingMode');
+    },
+});
 
 Template.itemtitle.events(eventsForEditable('title'));
 
