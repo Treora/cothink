@@ -3,7 +3,7 @@
  *    id    - the item's id string
  *    el()  - the item's DOM element
  *    data  - the document from the collection
- *    view  - the view returned by Blaze.render
+ *    template - the template instance corresponding to this item
  */
 var Item = {
     el: function () {
@@ -16,7 +16,7 @@ create_item = function (params) {
     var item = Object.create(Item);
     item.id = params.id;
     item.data = params.data;
-    item.view = params.view;
+    item.template = params.template;
     return item;
 };
 
@@ -41,7 +41,7 @@ Router.route('/item/:_id', function () {
           return data;
         };
         var view = Blaze.renderWithData(Template.item, data, document.body);
-        item = create_item({id: id, data: data, view: view});
+        item = create_item({id: id, data: data, template: view.template});
         visible_items[id] = item;
     }
 
@@ -183,15 +183,15 @@ Template.item.events({
         Router.go('/item/' + this._id);
     },
 
-    'click .delete': function () {
+    'click .delete': function (event, template) {
         Router.go('/');
         Items.remove(this._id);
-        hide_item(this._id);
+        hide_item(template);
     },
 
-    'click .hide': function () {
+    'click .hide': function (event, template) {
         Router.go('/');
-        hide_item(this._id);
+        hide_item(template);
     },
 });
 
@@ -201,10 +201,9 @@ Template.item.rendered = function () {
     focus_item(find_item(this.data._id));
 };
 
-var hide_item = function (id) {
-    item = visible_items[id];
-    Blaze.remove(item.view);
-    delete visible_items[id];
+var hide_item = function (template) {
+    Blaze.remove(template.view);
+    delete visible_items[template.data._id];
 };
 
 var link_items = function (id1, id2) {
