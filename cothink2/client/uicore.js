@@ -9,8 +9,6 @@ var UICoreEvents = {
 var UICore = {};
 
 UICore.init = function (msgbus) {
-    this.state = new ReactiveDict;
-
     msgbus.on(UICoreEvents, this);
 };
 
@@ -36,6 +34,7 @@ UICore.getFocussedItem = function () {
 };
 
 uiCore = Object.create(UICore);
+uiCore.state = new ReactiveDict;
 
 Meteor.startup(function () {
     uiCore.init(msgbus);
