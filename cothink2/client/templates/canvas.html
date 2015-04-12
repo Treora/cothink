@@ -1,3 +1,12 @@
 <template name="canvas">
     Hi. Focussed = {{focussedItem}}.
+    <ul>
+        <a href="/item/123">123</a>
+        <a href="/item/455">455</a>
+        <a href="/item/99">99</a>
+    </ul>
+    <br>
+    {{#each visibleItems}}
+        <p>{{this.content}}</p>
+    {{/each}}
 </template>
