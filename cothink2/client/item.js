@@ -3,10 +3,10 @@ Item = {};
 itemManager = (function () {
 
     var getItemById = function (id) {
+        var itemData = itemsCollection.findOne(id);
         var item = Object.create(Item);
         item.id = id;
-        item.title = 'lalala';
-        item.content = 'bla, my id is ' + id + '.';
+        _.extend(item, itemData);
         return item;
     };
 
