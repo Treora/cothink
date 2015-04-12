@@ -1,7 +1,7 @@
 
 var UICoreEvents = {
     'routedToItem': function (itemId) {
-        var item = items.getItemById(itemId);
+        var item = itemManager.getItemById(itemId);
         this.setFocussedItem(item);
     }
 };
@@ -18,7 +18,7 @@ UICore.setFocussedItem = function (item) {
     }
     else {
         assert_type(item, Item);
-        itemId = item.id;
+        var itemId = item.id;
         this.state.set('focussedItem', itemId);
     }
 };
@@ -29,7 +29,7 @@ UICore.getFocussedItem = function () {
         return null;
     }
     else {
-        return items.getItemById(id);
+        return itemManager.getItemById(id);
     }
 };
 

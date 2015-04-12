@@ -5,7 +5,7 @@ Template.canvas.rendered = function () {
 
 
 Template.canvas.helpers({
-    item: function () {
+    focussedItem: function () {
         return uiCore.state.get('focussedItem');
     },
 });

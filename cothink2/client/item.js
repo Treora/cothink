@@ -1,9 +1,9 @@
 Item = {};
 
-items = (function () {
+itemManager = (function () {
 
     var getItemById = function (id) {
-        item = Object.create(Item);
+        var item = Object.create(Item);
         item.id = id;
         item.title = 'lalala';
         item.content = 'bla, my id is ' + id + '.';
