@@ -11,5 +11,6 @@ Item.getData = function () {
 Template.item.onRendered(function () {
     this.$('.item').draggable({
         containment: 'document',
+        stack: '.item',
     });
 });
