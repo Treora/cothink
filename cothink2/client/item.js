@@ -7,3 +7,9 @@ Item.isFocussed = function () {
 Item.getData = function () {
     return itemsCollection.findOne(this.id);
 };
+
+Template.item.onRendered(function () {
+    this.$('.item').draggable({
+        containment: 'document',
+    });
+});
