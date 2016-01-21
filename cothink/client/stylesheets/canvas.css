@@ -1,0 +1,16 @@
+.canvas {
+    background-image: linear-gradient(to bottom, #eef 50%, #def 100%);
+    background-attachment: fixed;
+
+    font-family: sans-serif;
+    font-size: 14px;
+
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+.canvas ul {
+    margin: 0;
+    list-style-type: none;
+}

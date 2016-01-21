@@ -1,0 +1,11 @@
+.editable-container .editable-editor {
+    display: none;
+}
+
+.editable-container.editing-mode .editable-editor {
+    display: block;
+}
+
+.editable-container.editing-mode .editable-display {
+    display: none;
+}
